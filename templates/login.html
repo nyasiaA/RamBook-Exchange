@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | RamBook Exchange</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Ram<span>Book</span> Exchange</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Browse Books</a>
+        <a href="add_book.html">Sell or Trade</a>
+        <a href="return_books.html">Return Books</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+</header>
+
+<section class="auth-section">
+
+    <div class="auth-card">
+
+        <h1>Welcome Back, Ram!</h1>
+        <p class="auth-subtitle">
+            Sign in to your RamBook Exchange account.
+        </p>
+
+        <form id="loginForm" method="post">
+
+            <label for="email">Student Email</label>
+            <input type="email" id="email" name="email"
+                   placeholder="Enter your student email"
+                   autocomplete="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"
+                   placeholder="Enter your password"
+                   autocomplete="current-password" required>
+
+            <div class="show-password">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">Show Password</label>
+            </div>
+
+            <button type="submit" class="auth-btn">
+                Sign In
+            </button>
+
+        </form>
+
+        <p id="loginMessage" class="auth-message" hidden>
+            Demo only. Login will be available once
+            the backend is connected.
+        </p>
+
+        <p class="auth-link">
+            Don't have an account?
+            <a href="register.html">Register Here</a>
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2026 RamBook Exchange</p>
+    <p>For Rams. By Rams.</p>
+    <p>Unofficial WSSU student project.</p>
+</footer>
+
+<script>
+    const password = document.getElementById("password");
+
+    document.getElementById("showPassword")
+        .addEventListener("change", function() {
+            password.type = this.checked ? "text" : "password";
+        });
+
+    document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            document.getElementById("loginMessage").hidden = false;
+        });
+</script>
+
+</body>
+</html>

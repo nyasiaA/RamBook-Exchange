@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Return | RamBook Exchange</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Ram<span>Book</span> Exchange</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Browse Books</a>
+        <a href="add_book.html">Sell or Trade</a>
+        <a href="return_books.html">Return Books</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="return_status.html">Track Return</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<section class="tracking-hero">
+    <h1>Track Your Textbook Return</h1>
+    <p>Stay updated without visiting the bookstore.</p>
+</section>
+
+<main class="tracking-container">
+
+    <div class="tracking-card">
+
+        <h2>Find Your Return</h2>
+
+        <p>Enter your return confirmation code below.</p>
+
+        <form id="trackingForm">
+
+            <label for="returnCode">Return Confirmation Code</label>
+
+            <input type="text" id="returnCode"
+                   placeholder="Example: RAM-102850" required>
+
+            <button type="submit" class="auth-btn">
+                Track Return
+            </button>
+
+        </form>
+
+        <p class="demo-note">
+            Demo codes: RAM-102850, RAM-102851, RAM-102852
+        </p>
+
+        <div id="trackingError" role="status" hidden>
+            Return code not found. Please check your confirmation code.
+        </div>
+
+        <div id="trackingResult" hidden>
+
+            <h2>Return Information</h2>
+
+            <p><strong>Textbook:</strong> <span id="trackedBook"></span></p>
+
+            <p><strong>Return Code:</strong> <span id="trackedCode"></span></p>
+
+            <p><strong>Status:</strong> <span id="trackedStatus"></span></p>
+
+            <div class="return-timeline">
+
+                <div class="timeline-step">
+                    <span class="timeline-circle">1</span>
+                    <div>
+                        <h3>Return Scheduled</h3>
+                        <p>Your return request has been created.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <span class="timeline-circle">2</span>
+                    <div>
+                        <h3>Textbook Dropped Off</h3>
+                        <p>Your textbook has been received.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <span class="timeline-circle">3</span>
+                    <div>
+                        <h3>Bookstore Verification</h3>
+                        <p>Bookstore staff are reviewing your return.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <span class="timeline-circle">4</span>
+                    <div>
+                        <h3>Return Completed</h3>
+                        <p>Your textbook return has been verified.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 RamBook Exchange</p>
+    <p>For Rams. By Rams.</p>
+    <p>Unofficial WSSU student project.</p>
+</footer>
+
+<script>
+    const returns = {
+        "RAM-102850": {
+            book: "Principles of Microeconomics",
+            status: "Awaiting Drop-Off",
+            stage: 1
+        },
+        "RAM-102851": {
+            book: "Business Statistics",
+            status: "Completed",
+            stage: 4
+        },
+        "RAM-102852": {
+            book: "College Physics",
+            status: "Under Review",
+            stage: 3
+        }
+    };
+
+    document.getElementById("trackingForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const code = document.getElementById("returnCode")
+                .value.trim().toUpperCase();
+
+            const result = document.getElementById("trackingResult");
+            const error = document.getElementById("trackingError");
+
+            if (!Object.prototype.hasOwnProperty.call(returns, code)) {
+                result.hidden = true;
+                error.hidden = false;
+                return;
+            }
+
+            const record = returns[code];
+
+            error.hidden = true;
+            result.hidden = false;
+
+            document.getElementById("trackedBook").textContent =
+                record.book;
+
+            document.getElementById("trackedCode").textContent =
+                code;
+
+            document.getElementById("trackedStatus").textContent =
+                record.status;
+
+            document.querySelectorAll(".timeline-step")
+                .forEach(function(step, index) {
+
+                    step.classList.toggle(
+                        "timeline-active",
+                        index < record.stage
+                    );
+                });
+        });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return TextBooks | RamBook Exchange</title>
+     <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Ram<span>Book</span> Exchange</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Browse Books</a>
+        <a href="add_book.html">Sell or Trade</a>
+        <a href="return_books.html">Return Books</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+</header>
+
+<section class="return-hero">
+    <h1>Contactless Textbook Returns</h1>
+    <p>Skip the line. Return your textbooks on your schedule.</p>
+    <p>Student project prototype</p>
+</section>
+
+<section class="return-container">
+
+    <div class="return-instructions">
+    <h2>How to Return Your Books</h2>
+
+    <ol>
+        <li>Complete the textbook return form.</li>
+        <li>Receive your return confirmation code.</li>
+        <li>Attach the code to your textbook.</li>
+        <li>Visit an approved bookstore drop-off location.</li>
+        <li>Wait for bookstore staff to verify your return.</li>
+    </ol>
+
+    <p>This is a proposed return service, not an official bookstore system.</p>
+    </div>
+
+<div class="return-form">
+    <h2>Schedule a Textbook Return</h2>
+
+    <form id="returnForm">
+         <label for="studentName">Full Name</label>
+            <input type="text" id="studentName" name="studentName" required>
+
+            <label for="studentID">Student ID</label>
+            <input type="text" id="studentID" name="studentID" required>
+
+            <label for="email">Student Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="bookTitle">Textbook Title</label>
+            <input type="text" id="bookTitle" name="bookTitle" required>
+
+            <label for="isbn">ISBN Number</label>
+            <input type="text" id="isbn" name="isbn" required>
+
+            <label for="orderNumber">Rental Order Number</label>
+            <input type="text" id="orderNumber" name="orderNumber" required>
+
+            <label for="condition">Book Condition</label>
+            <select id="condition" name="condition" required>
+                <option value="">Select Condition</option>
+                <option>Like New</option>
+                <option>Good</option>
+                <option>Fair</option>
+                <option>Damaged</option>
+            </select>
+
+            <label for="returnDate">Preferred Drop-Off Date</label>
+            <input type="date" id="returnDate" name="returnDate" required>
+
+            <button type="submit" class="return-btn">
+                Generate Return Code
+            </button>
+
+    </form>
+
+    <a href="return_status.html" class="dashboard-link">
+        Track My Return
+    </a>
+
+    <div id="confirmation" hidden></div>
+</div>
+</section>
+<footer>
+    <p>&copy; 2026 RamBook Exchange</p>
+    <p>For Rams. By Rams.</p>
+    <p>Unofficial WSSU student project.</p>
+</footer>
+
+<script>
+    document.getElementById("returnForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const code = "RAM-" + Math.floor(100000 + Math.random() * 900000);
+
+        const confirmation = document.getElementById("confirmation");
+
+        confirmation.hidden = false;
+        confirmation.innerHTML = `
+            <h2>Demo Return Request Created!</h2>
+            <p>Your return confirmation code is:</p>
+            <h3>${code}</h3>
+            <p>Status: Awaiting Drop-Off</p>
+            <p>This is a demonstration. No bookstore request has been submitted.</p>
+        `;
+
+        this.reset();
+    });
+</script>
+
+</body>
+</html>

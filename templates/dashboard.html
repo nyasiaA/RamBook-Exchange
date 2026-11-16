@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | RamBook Exchange</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Ram<span>Book</span> Exchange</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Browse Books</a>
+        <a href="add_book.html">Sell or Trade</a>
+        <a href="return_books.html">Return Books</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html">Logout (Demo)</a>
+    </nav>
+</header>
+
+<section class="dashboard-hero">
+    <h1>Welcome Back, Ram!</h1>
+    <p>Manage your textbooks, exchanges, and bookstore returns.</p>
+</section>
+
+<main class="dashboard-container">
+
+    <p class="dashboard-note">Student Dashboard — Sample Data</p>
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <h3>Active Listings</h3>
+            <h2 id="listingCount">2</h2>
+        </div>
+
+        <div class="stat-card">
+            <h3>Exchange Requests</h3>
+            <h2>1</h2>
+        </div>
+
+        <div class="stat-card">
+            <h3>Pending Returns</h3>
+            <h2>1</h2>
+        </div>
+
+        <div class="stat-card">
+            <h3>Completed Returns</h3>
+            <h2>3</h2>
+        </div>
+
+    </div>
+
+    <section class="dashboard-panel">
+
+        <h2>Quick Actions</h2>
+
+        <div class="dashboard-actions">
+            <a href="add_book.html">+ List a Textbook</a>
+            <a href="marketplace.html">Browse Textbooks</a>
+            <a href="return_books.html">Schedule a Return</a>
+            <a href="return_status.html">Track My Returns</a>
+        </div>
+
+    </section>
+
+    <section class="dashboard-panel">
+
+        <h2>My Textbook Listings</h2>
+
+        <div class="table-container">
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Textbook</th>
+                        <th>Price</th>
+                        <th>Condition</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listingTable">
+                    <tr>
+                        <td>College Physics</td>
+                        <td>$45.00</td>
+                        <td>Good</td>
+                        <td>
+                            <span class="status-active">Available</span>
+                        </td>
+                        <td>
+                            <button class="delete-btn">Remove</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Financial Accounting</td>
+                        <td>$40.00</td>
+                        <td>Like New</td>
+                        <td>
+                            <span class="status-active">Available</span>
+                        </td>
+                        <td>
+                            <button class="delete-btn">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <section class="dashboard-panel">
+
+        <h2>My Exchange Requests</h2>
+
+        <div class="table-container">
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Textbook</th>
+                        <th>Request Type</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Introduction to Python</td>
+                        <td>Purchase</td>
+                        <td>
+                            <span class="status-pending">Pending</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <section class="dashboard-panel">
+
+        <h2>My Bookstore Returns</h2>
+
+        <div class="table-container">
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Textbook</th>
+                        <th>Return Code</th>
+                        <th>Drop-Off Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Principles of Microeconomics</td>
+                        <td>RAM-102850</td>
+                        <td>December 8, 2026</td>
+                        <td>
+                            <span class="status-pending">
+                                Awaiting Drop-Off
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Business Statistics</td>
+                        <td>RAM-102851</td>
+                        <td>November 12, 2026</td>
+                        <td>
+                            <span class="status-active">
+                                Completed
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a href="return_books.html" class="dashboard-link">
+            Schedule Another Return
+        </a>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 RamBook Exchange</p>
+    <p>For Rams. By Rams.</p>
+    <p>Unofficial WSSU student project.</p>
+</footer>
+
+<script>
+    document.querySelectorAll(".delete-btn").forEach(function(button) {
+        button.addEventListener("click", function() {
+
+            const confirmed = confirm(
+                "Are you sure you want to remove this sample listing?"
+            );
+
+            if (confirmed) {
+                this.closest("tr").remove();
+
+                const remaining = document.querySelectorAll(
+                    "#listingTable tr"
+                ).length;
+
+                document.getElementById("listingCount").textContent =
+                    remaining;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

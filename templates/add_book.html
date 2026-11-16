@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List a Textbook | RamBook Exchange</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Ram <span> Book</span> Exchange</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Browse Books</a>
+        <a href="add_book.html">Sell or Trade</a>
+        <a href="return_books.html">Return Books</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+</header>
+
+<section class="listing-hero">
+    <h1>Sell or Trade Your Textbooks</h1>
+    <p>Give your old textbooks a new home.</p>
+    <p>Help a fellow Ram while saving money.</p>
+</section>
+
+<section class="listing-container">
+
+    <div class="listing-tips">
+        <h2>Tips for Listing Your Textbook</h2>
+
+        <ul>
+            <li>Include the correct textbook title and author.</li>
+            <li>Provide the ISBN and course information.</li>
+            <li>Be honest about the book's condition.</li>
+            <li>Set a reasonable price.</li>
+            <li>Upload a clear picture of your textbook.</li>
+            <li>Arrange exchanges in safe, public campus locations.</li>
+        </ul>
+    </div>
+
+    <div class="listing-form">
+
+        <h2>Textbook Information</h2>
+
+        <form id="listingForm" enctype="multipart/form-data">
+
+            <label for="title">Textbook Title</label>
+            <input type="text" id="title" name="title"
+                   placeholder="Enter textbook title" required>
+
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="isbn">ISBN Number</label>
+            <input type="text" id="isbn" name="isbn" required>
+
+            <label for="course">Course Name or Number</label>
+            <input type="text" id="course" name="course"
+                   placeholder="Example: PHY 2331" required>
+
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="science">Science</option>
+                <option value="business">Business</option>
+                <option value="technology">Technology</option>
+                <option value="mathematics">Mathematics</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="condition">Book Condition</label>
+            <select id="condition" name="condition" required>
+                <option value="">Select Condition</option>
+                <option>Like New</option>
+                <option>Good</option>
+                <option>Fair</option>
+                <option>Damaged</option>
+            </select>
+
+            <label for="listingType">Listing Type</label>
+            <select id="listingType" name="listingType" required>
+                <option value="">Select Listing Type</option>
+                <option value="sell">Sell</option>
+                <option value="trade">Trade</option>
+                <option value="free">Give Away</option>
+            </select>
+
+            <div id="priceContainer">
+                <label for="price">Price ($)</label>
+                <input type="number" id="price" name="price"
+                       min="0.01" step="0.01" placeholder="0.00">
+            </div>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="5"
+                      placeholder="Provide additional information about your textbook"></textarea>
+
+            <label for="bookImage">Upload Textbook Image</label>
+            <input type="file" id="bookImage" name="bookImage"
+                   accept="image/*">
+
+            <img id="imagePreview" alt="Textbook preview" hidden>
+
+            <button type="submit" class="listing-btn">
+                Post Textbook
+            </button>
+
+        </form>
+
+        <div id="listingConfirmation" hidden>
+            <h3>Textbook Form Completed!</h3>
+            <p>Your sample listing was created.</p>
+            <p>Listings will be saved once the backend is connected.</p>
+
+            <a href="marketplace.html">Browse Textbooks</a>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2026 RamBook Exchange</p>
+    <p>For Rams. By Rams.</p>
+    <p>Unofficial WSSU student project.</p>
+</footer>
+
+<script>
+    const listingType = document.getElementById("listingType");
+    const priceContainer = document.getElementById("priceContainer");
+    const price = document.getElementById("price");
+
+    listingType.addEventListener("change", function() {
+        if (this.value === "sell") {
+            priceContainer.hidden = false;
+            price.required = true;
+        } else {
+            priceContainer.hidden = true;
+            price.required = false;
+            price.value = "";
+        }
+    });
+
+    listingType.dispatchEvent(new Event("change"));
+
+    const bookImage = document.getElementById("bookImage");
+    const imagePreview = document.getElementById("imagePreview");
+
+    bookImage.addEventListener("change", function() {
+        const file = this.files[0];
+
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                imagePreview.src = event.target.result;
+                imagePreview.hidden = false;
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.hidden = true;
+            imagePreview.removeAttribute("src");
+        }
+    });
+
+    document.getElementById("listingForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        document.getElementById("listingConfirmation").hidden = false;
+
+        this.reset();
+        imagePreview.hidden = true;
+        imagePreview.removeAttribute("src");
+
+        listingType.dispatchEvent(new Event("change"));
+    });
+</script>
+
+</body>
+</html>

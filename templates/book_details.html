@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details | RamBook Exchange</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Ram<span>Book</span> Exchange</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Browse Books</a>
+        <a href="add_book.html">Sell or Trade</a>
+        <a href="return_books.html">Return Books</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+</header>
+
+<section class="details-hero">
+    <h1>Textbook Details</h1>
+    <p>Find your next textbook. Connect with a fellow Ram.</p>
+</section>
+
+<main class="details-container">
+
+    <a href="marketplace.html" class="back-link">
+        &larr; Back to Marketplace
+    </a>
+
+    <div class="details-card">
+
+        <div class="details-image" id="bookCover">
+            College Physics
+        </div>
+
+        <div class="details-info">
+
+            <span class="status-active">Available</span>
+
+            <h1 id="bookTitle">College Physics</h1>
+
+            <p class="details-price" id="bookPrice">$45.00</p>
+
+            <hr>
+
+            <p><strong>Course:</strong> <span id="bookCourse">PHY 2331</span></p>
+
+            <p><strong>Condition:</strong> <span id="bookCondition">Good</span></p>
+
+            <p><strong>Seller:</strong> Sample WSSU Student</p>
+
+            <p><strong>Listing Type:</strong> Sale or Trade (Demo)</p>
+
+            <p><strong>Exchange Location:</strong> Public campus location</p>
+
+            <h2>Description</h2>
+
+            <p>
+                Sample textbook listing. Contact the seller
+                to discuss the book's condition and arrange
+                a safe exchange on campus.
+            </p>
+
+            <div class="details-buttons">
+
+                <button class="purchase-btn" id="purchaseBtn">
+                    Request to Purchase
+                </button>
+
+                <button class="trade-btn" id="tradeBtn">
+                    Request a Trade
+                </button>
+
+            </div>
+
+            <div id="requestConfirmation" role="status" hidden></div>
+
+        </div>
+
+    </div>
+
+    <section class="exchange-safety">
+
+        <h2>Safe Textbook Exchanges</h2>
+
+        <p>Always arrange textbook exchanges in public campus locations.</p>
+
+        <p>Inspect your textbook before completing the transaction.</p>
+
+        <p>Never share your password or sensitive personal information.</p>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 RamBook Exchange</p>
+    <p>For Rams. By Rams.</p>
+    <p>Unofficial WSSU student project.</p>
+</footer>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    const title = params.get("title") || "College Physics";
+    const price = params.get("price") || "$45.00";
+    const course = params.get("course") || "PHY 2331";
+    const condition = params.get("condition") || "Good";
+
+    document.getElementById("bookTitle").textContent = title;
+    document.getElementById("bookCover").textContent = title;
+    document.getElementById("bookPrice").textContent = price;
+    document.getElementById("bookCourse").textContent = course;
+    document.getElementById("bookCondition").textContent = condition;
+
+    function requestBook(type) {
+        const confirmation =
+            document.getElementById("requestConfirmation");
+
+        confirmation.hidden = false;
+
+        confirmation.textContent =
+            type + " request selected for " + title +
+            ". Demo only. No request has been sent.";
+    }
+
+    document.getElementById("purchaseBtn")
+        .addEventListener("click", function() {
+            requestBook("Purchase");
+        });
+
+    document.getElementById("tradeBtn")
+        .addEventListener("click", function() {
+            requestBook("Trade");
+        });
+</script>
+
+</body>
+</html>

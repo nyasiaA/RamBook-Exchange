@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore Admin | RamBook Exchange</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Ram<span>Book</span> Exchange</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="return_books.html">Return Books</a>
+        <a href="return_status.html">Track Return</a>
+        <a href="bookstore_admin.html">Bookstore Admin</a>
+        <a href="login.html">Logout (Demo)</a>
+    </nav>
+</header>
+
+<section class="dashboard-hero">
+    <h1>Bookstore Administration</h1>
+    <p>Manage and verify contactless textbook returns.</p>
+</section>
+
+<main class="dashboard-container">
+
+    <p class="dashboard-note">
+        Bookstore Staff Portal — Demonstration Only
+    </p>
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <h3>Total Returns</h3>
+            <h2 id="totalReturns">3</h2>
+        </div>
+
+        <div class="stat-card">
+            <h3>Awaiting Drop-Off</h3>
+            <h2 id="pendingReturns">1</h2>
+        </div>
+
+        <div class="stat-card">
+            <h3>Under Review</h3>
+            <h2 id="reviewReturns">1</h2>
+        </div>
+
+        <div class="stat-card">
+            <h3>Completed Returns</h3>
+            <h2 id="completedReturns">1</h2>
+        </div>
+
+    </div>
+
+    <section class="dashboard-panel">
+
+        <h2>Manage Textbook Returns</h2>
+
+        <div class="admin-search">
+            <input type="text" id="adminSearch"
+                   placeholder="Search by student, textbook, or return code...">
+        </div>
+
+        <div class="table-container">
+
+            <table class="dashboard-table">
+
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Textbook</th>
+                        <th>Return Code</th>
+                        <th>Drop-Off Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="returnsTable">
+
+                    <tr>
+                        <td>Sample Student 1</td>
+                        <td>Principles of Microeconomics</td>
+                        <td>RAM-102850</td>
+                        <td>Dec. 8, 2026</td>
+                        <td>
+                            <select class="return-status-select">
+                                <option selected>Awaiting Drop-Off</option>
+                                <option>Received</option>
+                                <option>Under Review</option>
+                                <option>Completed</option>
+                                <option>Issue Found</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="update-btn">Update</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Sample Student 2</td>
+                        <td>Business Statistics</td>
+                        <td>RAM-102851</td>
+                        <td>Nov. 12, 2026</td>
+                        <td>
+                            <select class="return-status-select">
+                                <option>Awaiting Drop-Off</option>
+                                <option>Received</option>
+                                <option>Under Review</option>
+                                <option selected>Completed</option>
+                                <option>Issue Found</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="update-btn">Update</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Sample Student 3</td>
+                        <td>College Physics</td>
+                        <td>RAM-102852</td>
+                        <td>Nov. 15, 2026</td>
+                        <td>
+                            <select class="return-status-select">
+                                <option>Awaiting Drop-Off</option>
+                                <option>Received</option>
+                                <option selected>Under Review</option>
+                                <option>Completed</option>
+                                <option>Issue Found</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="update-btn">Update</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <p id="adminMessage" role="status" hidden></p>
+
+    </section>
+
+    <section class="dashboard-panel">
+
+        <h2>Bookstore Return Procedures</h2>
+
+        <ol class="admin-procedures">
+            <li>Collect textbooks from the designated drop-off location.</li>
+            <li>Locate the return confirmation code.</li>
+            <li>Match the textbook with its return request.</li>
+            <li>Inspect the textbook for damage.</li>
+            <li>Update the return status.</li>
+            <li>Mark the return as completed after verification.</li>
+        </ol>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 RamBook Exchange</p>
+    <p>For Rams. By Rams.</p>
+    <p>Unofficial WSSU student project.</p>
+</footer>
+
+<script>
+    const rows = document.querySelectorAll("#returnsTable tr");
+
+    rows.forEach(function(row) {
+        row.dataset.status =
+            row.querySelector("select").value;
+    });
+
+    function updateStats() {
+
+        let pending = 0;
+        let review = 0;
+        let completed = 0;
+
+        rows.forEach(function(row) {
+
+            const status = row.dataset.status;
+
+            if (status === "Awaiting Drop-Off") {
+                pending++;
+            } else if (status === "Under Review") {
+                review++;
+            } else if (status === "Completed") {
+                completed++;
+            }
+
+        });
+
+        document.getElementById("totalReturns").textContent =
+            rows.length;
+
+        document.getElementById("pendingReturns").textContent =
+            pending;
+
+        document.getElementById("reviewReturns").textContent =
+            review;
+
+        document.getElementById("completedReturns").textContent =
+            completed;
+    }
+
+    document.querySelectorAll(".update-btn")
+        .forEach(function(button) {
+
+            button.addEventListener("click", function() {
+
+                const row = this.closest("tr");
+                const status = row.querySelector("select").value;
+                const code = row.cells[2].textContent;
+
+                row.dataset.status = status;
+
+                const message =
+                    document.getElementById("adminMessage");
+
+                message.hidden = false;
+
+                message.textContent =
+                    code + " updated to " + status +
+                    ". Demo only. Changes are not permanently saved.";
+
+                updateStats();
+            });
+        });
+
+    document.getElementById("adminSearch")
+        .addEventListener("input", function() {
+
+            const search = this.value.toLowerCase();
+
+            rows.forEach(function(row) {
+                row.style.display =
+                    row.textContent.toLowerCase().includes(search)
+                    ? "" : "none";
+            });
+        });
+</script>
+
+</body>
+</html>
