@@ -43,8 +43,13 @@ Some features are still being integrated and tested.
 **Development Tools**
 - Visual Studio Code
 - Git and GitHub
+- Docker (containerization and testing)
+- Render (cloud deployment)
 - Docker
 - Render
+=======
+- Docker (containerization and testing)
+>>>>>>> a44e813 (Update README with completed deployment work)
 
 ## Project Structure
 
