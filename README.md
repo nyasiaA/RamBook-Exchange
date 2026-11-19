@@ -38,12 +38,13 @@ Some features are still being integrated and tested.
 
 **Database**
 - SQLite (currently used for local development)
-- PostgreSQL (planned for deployment)
+- PostgreSQL (cloud deployment)
 
 **Development Tools**
 - PyCharm
 - Git and GitHub
-- Docker (planned for deployment)
+- Docker (containerization and testing)
+- Render (cloud deployment)
 
 ## Project Structure
 
@@ -131,7 +132,7 @@ The application currently uses a local SQLite database for development.
 
 The frontend pages and Flask backend have been created. Frontend and backend integration is underway, and additional functionality and security testing are still needed.
 
-PostgreSQL integration and cloud deployment will be documented once completed.
+PostgreSQL integration, Docker containerization, and cloud deployment through Render have been completed and tested.
 
 ## GitHub Repository
 
