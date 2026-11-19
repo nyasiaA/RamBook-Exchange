@@ -37,14 +37,14 @@ Some features are still being integrated and tested.
 - Flask-Login
 
 **Database**
-- SQLite (currently used for local development)
+- SQLite (local development)
 - PostgreSQL (cloud deployment)
 
 **Development Tools**
-- PyCharm
+- Visual Studio Code
 - Git and GitHub
-- Docker (containerization and testing)
-- Render (cloud deployment)
+- Docker
+- Render
 
 ## Project Structure
 
@@ -132,7 +132,7 @@ The application currently uses a local SQLite database for development.
 
 The frontend pages and Flask backend have been created. Frontend and backend integration is underway, and additional functionality and security testing are still needed.
 
-PostgreSQL integration, Docker containerization, and cloud deployment through Render have been completed and tested.
+PostgreSQL integration, Docker containerization, and cloud deployment through Render have been completed. The Docker image was successfully built and tested.
 
 ## GitHub Repository
 
